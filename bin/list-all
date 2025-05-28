@@ -8,10 +8,4 @@ plugin_dir=$(dirname "$(dirname "$current_script_path")")
 # shellcheck source=./lib/utils.bash
 source "${plugin_dir}/lib/utils.bash"
 
-list_all_versions() {
-	git ls-remote --tags --refs https://github.com/infrablocks/pkl_aws_secret_resource_reader.git |
-		awk '!/({})/ {print $2}' |
-		cut -f3 -d/ | tr -d 'v' | grep -v "0.0.0"
-}
-
 list_all_versions | xargs echo

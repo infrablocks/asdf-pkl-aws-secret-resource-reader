@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 set -euo pipefail
 
 current_script_path=${BASH_SOURCE[0]}
@@ -48,7 +47,7 @@ install_version() {
 	mkdir -p "$install_path/bin"
 
 	if [ -z "$download_path" ]; then
-		curl -s -L -o "$install_path/bin/pkl_aws_secret_resource_reader" "https://github.com/infrablocks/pkl_aws_secret_resource_reader/releases/download/v${install_version}/pkl_aws_secret_resource_reader-${os_type}-${arch_type}"
+		curl -s -L -o "$install_path/bin/pkl_aws_secret_resource_reader" "${GH_REPO}/releases/download/v${install_version}/pkl_aws_secret_resource_reader-${os_type}-${arch_type}"
 	else
 		cp ${download_path}/pkl_aws_secret_resource_reader "${install_path}/bin/pkl_aws_secret_resource_reader"
 	fi

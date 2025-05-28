@@ -20,7 +20,7 @@ download_version() {
 	os_type=$(uname -s)
 	case "$os_type" in
 	Darwin)
-		os_type="macos"
+		os_type="darwin"
 		;;
 	Linux)
 		os_type="linux"
@@ -36,17 +36,16 @@ download_version() {
 		arch_type="amd64"
 		;;
 	arm64)
-		arch_type="aarch64"
+		arch_type="arm64"
 		;;
 	*)
 		echo "Unsupported architecture: $arch_type"
 		exit 1
 		;;
 	esac
-
-	curl -s -L -o "$download_path/pkl_aws_secret_resource_reader" "https://github.com/infrablocks/pkl_aws_secret_resource_reader/releases/download/v${install_version}/pkl_aws_secret_resource_reader-${os_type}-${arch_type}"
+	curl -s -L -o "$download_path/pkl_aws_secret_resource_reader" "${GH_REPO}/releases/download/v${install_version}/pkl_aws_secret_resource_reader-${os_type}-${arch_type}"
 	chmod +x "$download_path/pkl_aws_secret_resource_reader"
 	return 0
 }
 
-install_version "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_DOWNLOAD_PATH"
+download_version "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_DOWNLOAD_PATH"
