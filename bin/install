@@ -21,7 +21,7 @@ install_version() {
 	os_type=$(uname -s)
 	case "$os_type" in
 	Darwin)
-		os_type="macos"
+		os_type="darwin"
 		;;
 	Linux)
 		os_type="linux"
@@ -37,7 +37,7 @@ install_version() {
 		arch_type="amd64"
 		;;
 	arm64)
-		arch_type="aarch64"
+		arch_type="arm64"
 		;;
 	*)
 		echo "Unsupported architecture: $arch_type"
