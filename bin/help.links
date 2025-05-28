@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "\
+Git Repository:	https://github.com/infrablocks/pkl_aws_secret_resource_reader"

@@ -8,4 +8,46 @@ plugin_dir=$(dirname "$(dirname "$current_script_path")")
 # shellcheck source=./lib/utils.bash
 source "${plugin_dir}/lib/utils.bash"
 
+install_version() {
+	local install_type="$1"
+	local install_version="$2"
+	local install_path="$3"
+
+	if [ "$install_type" == "ref" ]; then
+		return 1
+	fi
+
+	os_type=$(uname -s)
+	case "$os_type" in
+	Darwin)
+		os_type="macos"
+		;;
+	Linux)
+		os_type="linux"
+		;;
+	*)
+		echo "Unsupported OS: $os_type"
+		exit 1
+		;;
+	esac
+	arch_type=$(uname -m)
+	case "$arch_type" in
+	x86_64)
+		arch_type="amd64"
+		;;
+	arm64)
+		arch_type="aarch64"
+		;;
+	*)
+		echo "Unsupported architecture: $arch_type"
+		exit 1
+		;;
+	esac
+
+	mkdir -p "$install_path/bin"
+	curl -s -L -o "$install_path/bin/pkl_aws_secret_resource_reader" "https://github.com/infrablocks/pkl_aws_secret_resource_reader/releases/download/v${install_version}/pkl_aws_secret_resource_reader-${os_type}-${arch_type}"
+	chmod +x "$install_path/bin/pkl_aws_secret_resource_reader"
+	return 0
+}
+
 install_version "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "\
+This plugin installs the pkl_aws_secret_resource_reader command which is a plugin to allow you to include secrets from AWS secrets manager into Pkl code."
