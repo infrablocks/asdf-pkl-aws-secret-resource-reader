@@ -8,11 +8,10 @@ plugin_dir=$(dirname "$(dirname "$current_script_path")")
 # shellcheck source=./lib/utils.bash
 source "${plugin_dir}/lib/utils.bash"
 
-install_version() {
+download_version() {
 	local install_type="$1"
 	local install_version="$2"
-	local install_path="$3"
-	local download_path="$4"
+	local download_path="$3"
 
 	if [ "$install_type" == "ref" ]; then
 		return 1
@@ -45,16 +44,9 @@ install_version() {
 		;;
 	esac
 
-	mkdir -p "$install_path/bin"
-
-	if [ -z "$download_path" ]; then
-		curl -s -L -o "$install_path/bin/pkl_aws_secret_resource_reader" "https://github.com/infrablocks/pkl_aws_secret_resource_reader/releases/download/v${install_version}/pkl_aws_secret_resource_reader-${os_type}-${arch_type}"
-	else
-		cp ${download_path}/pkl_aws_secret_resource_reader "${install_path}/bin/pkl_aws_secret_resource_reader"
-	fi
-	
-	chmod +x "$install_path/bin/pkl_aws_secret_resource_reader"
+	curl -s -L -o "$download_path/pkl_aws_secret_resource_reader" "https://github.com/infrablocks/pkl_aws_secret_resource_reader/releases/download/v${install_version}/pkl_aws_secret_resource_reader-${os_type}-${arch_type}"
+	chmod +x "$download_path/pkl_aws_secret_resource_reader"
 	return 0
 }
 
-install_version "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH" "$ASDF_DOWNLOAD_PATH"
+install_version "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_DOWNLOAD_PATH"
